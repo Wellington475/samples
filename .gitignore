@@ -1,0 +1,9 @@
+*.iml
+*.ipr
+*.iws
+*.rdb
+*.db
+media/*.txt
+.classpath
+.idea/
+target/
