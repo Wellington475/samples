@@ -1,10 +1,20 @@
+# ignore
 *.iml
 *.ipr
 *.iws
 *.rdb
 *.db
 *.pyc
+*.yaml
+*.yml
+*.json
+*.csv
 *.egg-info/
+*.txt
+*.bash
+*.sql*
+*.db*
+*.log*
 media/*.txt
 .classpath
 .idea/
@@ -14,3 +24,6 @@ lib/
 local/
 include/
 bin/
+
+# Not ignore 
+!requirements.txt
