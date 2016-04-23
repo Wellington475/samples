@@ -6,6 +6,9 @@
 *.db
 *.pyc
 *.yaml
+*.backup
+*.test
+*.bkp
 *.yml
 *.json
 *.csv
@@ -20,6 +23,7 @@ media/*.txt
 .idea/
 target/
 share/
+build/
 lib/
 local/
 include/
