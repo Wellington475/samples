@@ -1,4 +1,5 @@
 # ignore
+*.zip
 *.iml
 *.ipr
 *.iws

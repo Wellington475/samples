@@ -1,7 +1,7 @@
-from pyramid.i18n import TranslationStringFactory
+from __future__ import unicode_literals
 
-_ = TranslationStringFactory('sample')
+from pyramid.view import view_config
 
-
-def my_view(request):
+#@view_config(renderer='json')
+def home(request):
     return {'project': 'sample'}
