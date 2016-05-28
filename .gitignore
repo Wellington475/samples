@@ -48,3 +48,4 @@ bin/
 
 # Not ignore 
 !requirements.txt
+!clojure/sample/stadiums.csv
