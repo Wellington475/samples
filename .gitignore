@@ -22,6 +22,7 @@ pom.xml.asc
 *.db
 *.pyc
 *.yaml
+*.css
 *.mo
 *.backup
 *.test
@@ -47,6 +48,7 @@ include/
 bin/
 .hgignore
 .hg/
+python/google-python-exercises/babynames/*.html
 *~
 \#*\#
 /.emacs.desktop
