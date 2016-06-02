@@ -8,4 +8,6 @@
 		[compojure "1.5.0"]
 		[ring "1.4.0"]
 		[ring/ring-json "0.4.0"]]
+  :aot  [sample.core]
+  :uberjar-name "clojure-sample-standalone.jar"
   :main sample.core)

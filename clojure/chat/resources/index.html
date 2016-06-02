@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Chat with RxJS</title>
+		<script type="text/javascript" src="../bower_components/rxjs/dist/rx.all.min.js"></script>
+		<script type="text/javascript" src="../bower_components/rxjs-dom/dist/rx.dom.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			console.clear();
+
+			var openObserver = Rx.Observer.create(function(e) {
+				console.info('socket open');
+				socket.onNext('test');
+			});
+
+			var closingObserver = Rx.Observer.create(function() {
+				console.log('socket is about to close');
+			});
+
+			socket = Rx.DOM.fromWebSocket(
+				'ws://localhost:9090',
+				null,
+				openObserver,
+				closingObserver);
+
+			socket.subscribe(
+				function(e) {
+					console.log('message: %s', e.data);
+				},
+				function(e) {
+					console.error('error: %s', e);
+				},
+				function() {
+					console.info('socket closed');
+				}
+			);
+		</script>
+	</body>
+</html>
