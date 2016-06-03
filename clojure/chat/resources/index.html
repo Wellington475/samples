@@ -4,10 +4,17 @@
 		<title>Chat with RxJS</title>
 		<script type="text/javascript" src="../bower_components/rxjs/dist/rx.all.min.js"></script>
 		<script type="text/javascript" src="../bower_components/rxjs-dom/dist/rx.dom.js"></script>
+		<script type="text/javascript" src="../bower_components/eventEmitter/EventEmitter.min.js"></script>
 	</head>
 	<body>
+		<ul id="results"></ul>
+		<input id="textInput" type="text"></input>
+		<input id="btn" type="button" value="Enviar">
+
 		<script type="text/javascript">
-			console.clear();
+			var eventEmitter = new EventEmitter();
+			var btn = document.getElementById('btn');
+			var _input = document.getElementById('textInput');
 
 			var openObserver = Rx.Observer.create(function(e) {
 				console.info('socket open');
@@ -18,7 +25,7 @@
 				console.log('socket is about to close');
 			});
 
-			socket = Rx.DOM.fromWebSocket(
+			var socket = Rx.DOM.fromWebSocket(
 				'ws://localhost:9090',
 				null,
 				openObserver,
@@ -26,15 +33,44 @@
 
 			socket.subscribe(
 				function(e) {
-					console.log('message: %s', e.data);
+					console.log('message:', e.data);
 				},
 				function(e) {
-					console.error('error: %s', e);
+					console.error('error:', e);
 				},
 				function() {
 					console.info('socket closed');
-				}
-			);
+				});
+
+			var input = Rx.Observable.fromEvent(eventEmitter, 'send');
+
+			input.subscribe(function() {
+				var _message = _input.value;
+				_input.value = '';
+				socket.onNext(_message);
+			});
+
+			var source = Rx.Observable.fromEvent(_input, 'keyup')
+						.distinctUntilChanged(function(e){
+							if(e.keyCode==13)
+								return e;
+						})
+						.map(function(e){
+							return e.target.value;
+						})
+						.filter(function(e){
+							return e.length > 2;
+						});
+
+			source.subscribe(function(e) {
+				eventEmitter.emit('send');
+			});
+
+			var btn = Rx.Observable.fromEvent(btn, 'click');
+			btn.subscribe(function(e) {
+				eventEmitter.emit('send');
+			});
+
 		</script>
 	</body>
 </html>

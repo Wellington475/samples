@@ -1,0 +1,31 @@
+{
+  "name": "chat",
+  "homepage": "https://github.com/RenanPalmeira/samples",
+  "authors": [
+    "Renan Palmeira <renan@forleven.com>"
+  ],
+  "description": "Sample Websocket Chat with Clojure",
+  "main": "",
+  "keywords": [
+    "clojure",
+    "python",
+    "chat",
+    "websocket",
+    "rx",
+    "reactive",
+    "extensions"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "rxjs-dom": "rx-dom#^7.0.3",
+    "rxjs": "^4.1.0",
+    "eventEmitter": "^5.0.0"
+  }
+}

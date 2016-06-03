@@ -94,4 +94,5 @@ flycheck_*.el
 
 # Not ignore 
 !requirements.txt
+!clojure/chat/bower.json
 !clojure/sample/stadiums.csv

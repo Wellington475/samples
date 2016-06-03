@@ -1,1 +1,2 @@
-web: java $JVM_OPTS -cp target/chat-standalone.jar clojure.main -m chat.core
+web: python client.py
+clj: java $JVM_OPTS -cp target/chat-standalone.jar clojure.main -m chat.core
