@@ -1,7 +1,8 @@
 (ns chat.core
-  (:use immutant.web.async)
   (:use immutant.web)
+  (:use immutant.web.async)
   (:use immutant.web.middleware)
+  (:use immutant.messaging)
   (:gen-class))
 
 (def websocket 
