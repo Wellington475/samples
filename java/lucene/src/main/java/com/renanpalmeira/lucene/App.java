@@ -17,6 +17,7 @@ public class App {
 	{
 		Analyzer analyzer = new BrazilianAnalyzer(); // or any other analyzer
 		TokenStream ts = analyzer.tokenStream("myfield", new StringReader("Eu gosto de você"));
+                OffsetAttribute offsetAtt = ts.addAttribute(OffsetAttribute.class);
 
 		try {
 			ts.reset(); // Resets this stream to the beginning. (Required)

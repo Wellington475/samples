@@ -1,19 +1,33 @@
 (ns clj-sentiment.core
-  (:import (java.io StringReader)
-           (org.apache.lucene.analysis.br BrazilianAnalyzer)
-           (org.apache.lucene.analysis.tokenattributes CharTermAttribute))
   (:gen-class))
 
-(println (java.util.Date.))
+;; Naive Bayes
 
-(def analyzer (BrazilianAnalyzer.))
+(def trainset (atom {}))
 
-(def stream (.tokenStream analyzer "text" (StringReader. "Eu gosto de você")))
-(.reset stream)
-(while (.incrementToken stream)
-		(do (println (.getAttribute stream CharTermAttribute)) ))
+(defn get-word-count [tag word]
+	(get-in @trainset [tag word] 0))
+
+(defn word-probability [word tag]
+  (let [word-count 					(get-word-count tag word)
+        word-in-tag 				(count (tag @trainset))]
+    (Math/log
+      (/ (+ word-count 1) (+ word-in-tag)))))
+
+(defn train
+  [word tag]
+  (let [word-count (get-word-count tag word)]
+		(swap! trainset assoc-in [tag word] (inc word-count))))
+
+(defn classify
+  [feature]
+  (let [tag (count (keys @trainset))]
+		(println tag))
+  (println @trainset))
 
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
+  (train "oi" :positive)
+  (classify "oi")
   (println "Hello, World!"))
