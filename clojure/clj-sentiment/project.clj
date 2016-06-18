@@ -7,10 +7,8 @@
                  [compojure "1.5.0"]
                  [ring "1.4.0"]
                  [ring/ring-json "0.4.0"]
-                 [naive-bayes "0.2.1"]
-                 [com.taoensso/sente "1.8.1"]
-                 [org.apache.lucene/lucene-core "6.0.1"]
-                 [org.apache.lucene/lucene-analyzers-common "6.0.1"]]
+                 [clojurewerkz/elastisch "2.2.1"]
+                 [clojurewerkz/neocons "3.0.0"]]
   :main ^:skip-aot clj-sentiment.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

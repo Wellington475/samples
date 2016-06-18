@@ -1,33 +1,19 @@
 (ns clj-sentiment.core
+  (:require [clojurewerkz.elastisch.rest :as elastic]
+            [clojurewerkz.elastisch.rest.document :as esd])
   (:gen-class))
 
-;; Naive Bayes
+(def conn (elastic/connect "http://127.0.0.1:9200"))
 
-(def trainset (atom {}))
+(defn id [& args]
+  (let [doc {:title "Elasticsearch with Clojure"
+             :body "bye bye solr"
+             :tag "clojure"
+             :sentiment "positive"}]
 
-(defn get-word-count [tag word]
-	(get-in @trainset [tag word] 0))
-
-(defn word-probability [word tag]
-  (let [word-count 					(get-word-count tag word)
-        word-in-tag 				(count (tag @trainset))]
-    (Math/log
-      (/ (+ word-count 1) (+ word-in-tag)))))
-
-(defn train
-  [word tag]
-  (let [word-count (get-word-count tag word)]
-		(swap! trainset assoc-in [tag word] (inc word-count))))
-
-(defn classify
-  [feature]
-  (let [tag (count (keys @trainset))]
-		(println tag))
-  (println @trainset))
+    (esd/put conn "clojure" "twitter" doc)))
 
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (train "oi" :positive)
-  (classify "oi")
   (println "Hello, World!"))
