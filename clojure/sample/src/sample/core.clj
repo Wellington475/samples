@@ -11,7 +11,7 @@
 (def stadiums
   (with-open [in-file (reader "stadiums.csv")]
     (doall
-     (read-csv in-file))))
+     (map #(zipmap [:stadium :qtd :min :city] %) (read-csv in-file)))))
 
 (defn date
 	[]
@@ -29,9 +29,8 @@
              :data stadiums}))
 
 (defn profile [request]
-  (let [id (Integer. (get-in request [:params :id]))]
-    (response (take id stadiums))))
-
+  (let [id (Integer. (get-in request [:params :id] 0))]
+    (response (nth stadiums id))))
 
 (defn timestamp [request]
   {:status 200
@@ -41,7 +40,7 @@
 (defroutes app
   (GET "/" [] "<p>Hello Compojure!</p>")
   (GET "/api" [] (wrap-json-response api))
-  (GET "/api/:id" [id] (wrap-json-params profile))
+  (GET "/api/:id" [id] (wrap-json-response profile))
   (GET "/timestamp" [] timestamp)
   (GET "/clojure" [] handler))
 
