@@ -99,4 +99,5 @@ flycheck_*.el
 !clojure/chat/bower.json
 !clojure/sample/stadiums.csv
 !java/lucene/pom.xml
+!java/spring/pom.xml
 !java/sample/pom.xml
