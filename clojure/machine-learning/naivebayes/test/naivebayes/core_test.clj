@@ -2,6 +2,10 @@
   (:require [clojure.test :refer :all]
             [naivebayes.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest bayes-propability-negative-test
+  (testing
+    (is (= 0.0 (p "happy" "negative")))))
+
+(deftest bayes-propability-positive-test
+  (testing
+    (is (= 0.21030992412487642 (p "happy" "positive")))))
