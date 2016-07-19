@@ -18,7 +18,6 @@
       <artifactId>grizzly-framework</artifactId>
       <version>${grizzlyVersion}</version>
     </dependency>
-
     <dependency>
       <groupId>org.glassfish.grizzly</groupId>
       <artifactId>grizzly-http</artifactId>
@@ -77,6 +76,7 @@
         <version>3.5.1</version>
         <configuration>
           <compilerArgument>-Xlint:deprecation</compilerArgument>
+          <compilerArgument>-Xlint:unchecked</compilerArgument>
         </configuration>
       </plugin>
       <plugin>
