@@ -53,6 +53,9 @@ build/
 lib/
 local/
 include/
+out/
+/resources/public/js/compiled/**
+figwheel_server.log
 bin/
 .hgignore
 .hg/
