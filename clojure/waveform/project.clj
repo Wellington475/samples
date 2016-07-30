@@ -35,9 +35,7 @@
 
                 :compiler {:main waveform.core
                            :asset-path "js/compiled/out"
-                           :foreign-libs [{:file "foreign/waveform.js"
-                                          :provides ["waveform"]}]
-                           
+                           :libs ["foreign/waveform.js"]
                            :output-to "resources/public/js/compiled/waveform.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true
