@@ -20,6 +20,7 @@ buildNumber.properties
 .lein-plugins/
 .lein-failures
 .nrepl-port
+*.swp
 *.zip
 .project
 .settings
@@ -54,7 +55,7 @@ lib/
 local/
 include/
 out/
-/resources/public/js/compiled/**
+clojure/waveform/resources/public/js/**
 figwheel_server.log
 bin/
 .hgignore
