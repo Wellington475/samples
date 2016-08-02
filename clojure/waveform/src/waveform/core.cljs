@@ -1,9 +1,7 @@
 (ns waveform.core
-  (:require [wf]))
+  (:require [org.waveform.Waveform]))
 
 (enable-console-print!)
-
-(wf/Waveform. (js-obj "container" (.getElementById js/document "teste") "data" (array [1 0.2 0.5])))
 
 (println "This text is printed from src/waveform/core.cljs. Go ahead and edit it and see reloading in action.")
 
@@ -15,4 +13,12 @@
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
+  )
+
+(def w (js/Waveform.
+        (clj->js {:container (.getElementById js/document "app")
+                  :innerColor (fn [x y] (.toString (str "#" (.floor js/Math (* (.random js/Math) 16777215))) 16))
+                  :data [1 0.2 0.5]})))
+
+(.log js/console (.update w
+                          (clj->js {:data [0.5 1.0 0.5 1.0 ]})))
