@@ -25,7 +25,7 @@
 
 ;; Enable linum
 
-(setq linum-mode t)
+(global-linum-mode 1)
 
 ;; Remove backup files backup~ and #autosave#
 ;; http://goo.gl/ojcJjL
@@ -61,10 +61,13 @@
 (if (package-installed-p 'auto-complete)
 	(ac-config-default))
 
-;; Rainbow & Clojure Hook
+;; Rainbow
 
 (if (package-installed-p 'rainbow-delimiters)
-	(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode))
+    (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+  )
 
 ;; Tabs & Python Hook
 
@@ -77,4 +80,10 @@
 ;; Monokai Theme
 
 (if (package-installed-p 'monokai-theme)
-	(load-theme 'monokai t))
+    (load-theme 'monokai t))
+
+;; Tabber
+
+(if (package-installed-p 'tabbar)
+    (global-set-key [M-left] 'tabbar-backward-tab)
+  (global-set-key [M-right] 'tabbar-forward-tab))
