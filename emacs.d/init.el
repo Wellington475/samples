@@ -218,3 +218,9 @@ That is, a string used to represent it on the tab bar."
 ;; Select All
 
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
+
+(defun browse-url-firefox-search (url)
+  ;; http://ergoemacs.org/emacs/elisp_idioms_prompting_input.html
+  (interactive "sDuck Search (GO): ")
+  (browse-url (browse-url-encode-url
+	       (concat "https://duckduckgo.com/?q=" url "&ia=web"))))
