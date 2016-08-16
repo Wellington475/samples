@@ -5,7 +5,7 @@
 ;; Set vendor
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-	
+  
 ;; Remover a barra superior.
 (when (fboundp 'tool-bar-mode)
 (tool-bar-mode -1))
@@ -13,10 +13,10 @@
 ;; Removendo scroolbars nativas do OS, redundantes
 (when (fboundp 'scroll-bar-mode)
 (scroll-bar-mode -1))
-	
+  
 ;; Aumentar a fonte um pouco
 (set-face-attribute 'default nil :height 130)
-	
+  
 ;; Fazer cursor parar de piscar
 (blink-cursor-mode 0)
 
@@ -47,8 +47,8 @@
 (package-initialize)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa" . "http://melpa.org/packages/")))
+       ("marmalade" . "http://marmalade-repo.org/packages/")
+       ("melpa" . "http://melpa.org/packages/")))
 
 (unless (package-installed-p 'cider)
   (package-refresh-contents)
@@ -113,11 +113,11 @@
 ;; Tabs & Python Hook
 
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (setq python-shell-interpreter "ipython")
-	    (setq indent-tabs-mode t)
-	    (setq python-indent 4)
-	    (setq tab-width 4)))
+    (lambda ()
+      (setq python-shell-interpreter "ipython")
+      (setq indent-tabs-mode t)
+      (setq python-indent 4)
+      (setq tab-width 4)))
 
 ;; Tabs & Html Hook
 
@@ -173,17 +173,17 @@
     "Return a label for TAB.
 That is, a string used to represent it on the tab bar."
     (let ((label  (if tabbar--buffer-show-groups
-		      (format "[%s]  " (tabbar-tab-tabset tab))
-		    (format "%s  " (tabbar-tab-value tab)))))
+          (format "[%s]  " (tabbar-tab-tabset tab))
+        (format "%s  " (tabbar-tab-value tab)))))
       ;; Unless the tab bar auto scrolls to keep the selected tab
       ;; visible, shorten the tab label to keep as many tabs as possible
       ;; in the visible area of the tab bar.
       (if tabbar-auto-scroll-flag
-	  label
-	(tabbar-shorten
-	 label (max 1 (/ (window-width)
-			 (length (tabbar-view
-				  (tabbar-current-tabset)))))))))
+    label
+  (tabbar-shorten
+   label (max 1 (/ (window-width)
+       (length (tabbar-view
+          (tabbar-current-tabset)))))))))
   (global-set-key [M-left] 'tabbar-backward-tab)
   (global-set-key [M-right] 'tabbar-forward-tab))
 
@@ -212,8 +212,8 @@ That is, a string used to represent it on the tab bar."
 ;; Custom Emacs
  
 (add-hook 'focus-out-hook
-	  (lambda ()
-	    (save-some-buffers t)))
+    (lambda ()
+      (save-some-buffers t)))
 
 ;; Select All
 
