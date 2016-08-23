@@ -5,27 +5,27 @@
 ;; Set vendor
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-  
+
 ;; Remover a barra superior.
 (when (fboundp 'tool-bar-mode)
-(tool-bar-mode -1))
+  (tool-bar-mode -1))
 
 ;; Removendo scroolbars nativas do OS, redundantes
 (when (fboundp 'scroll-bar-mode)
-(scroll-bar-mode -1))
-  
+  (scroll-bar-mode -1))
+
+;; Remove word wrap
+
+(toggle-truncate-lines nil)
+
 ;; Aumentar a fonte um pouco
 (set-face-attribute 'default nil :height 130)
-  
+
 ;; Fazer cursor parar de piscar
 (blink-cursor-mode 0)
 
 ;; Mostrar o path completo para o arquivo na barra superior
 (setq-default frame-title-format "%b (%f)")
-
-;; Removendo scroolbars nativas do OS, redundantes
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
 
 ;; Enable linum
 
@@ -47,8 +47,8 @@
 (package-initialize)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-       ("marmalade" . "http://marmalade-repo.org/packages/")
-       ("melpa" . "http://melpa.org/packages/")))
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("melpa" . "http://melpa.org/packages/")))
 
 (unless (package-installed-p 'cider)
   (package-refresh-contents)
@@ -85,6 +85,18 @@
   (package-refresh-contents)
   (package-install 'undo-tree))
 
+(unless (package-installed-p 'tabbar-ruler)
+  (package-refresh-contents)
+  (package-install 'tabbar-ruler))
+
+(unless (package-installed-p 'powerline)
+  (package-refresh-contents)
+  (package-install 'powerline))
+
+(unless (package-installed-p 'mode-icons)
+  (package-refresh-contents)
+  (package-install 'mode-icons))
+
 ;; Move Lines
 
 (require 'move-lines)
@@ -105,19 +117,19 @@
 ;; Rainbow & Clojure Hook
 
 (if (package-installed-p 'rainbow-delimiters)
-    (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'php-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
+    (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'python-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'php-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
 
 ;; Tabs & Python Hook
 
 (add-hook 'python-mode-hook
-    (lambda ()
-      (setq python-shell-interpreter "ipython")
-      (setq indent-tabs-mode t)
-      (setq python-indent 4)
-      (setq tab-width 4)))
+	  (lambda ()
+	    (setq python-shell-interpreter "ipython")
+	    (setq indent-tabs-mode t)
+	    (setq python-indent 4)
+	    (setq tab-width 4)))
 
 ;; Tabs & Html Hook
 
@@ -131,64 +143,6 @@
 (if (package-installed-p 'monokai-theme)
     (load-theme 'monokai t))
 
-;; Tabber - inspired by Amit Patel screenshot http://www.emacswiki.org/pics/static/NyanModeWithCustomBackground.png
-(if (package-installed-p 'tabbar)
-    (require 'tabbar)
-  ;; Tabbar settings
-  (set-face-attribute
-   'tabbar-default nil
-   :background "gray20"
-   :foreground "gray20"
-   :box '(:line-width 1 :color "gray20" :style nil))
-  (set-face-attribute
-   'tabbar-unselected nil
-   :background "gray30"
-   :foreground "white"
-   :box '(:line-width 5 :color "gray30" :style nil))
-  (set-face-attribute
-   'tabbar-selected nil
-   :background "gray75"
-   :foreground "black"
-   :box '(:line-width 5 :color "gray75" :style nil))
-  (set-face-attribute
-   'tabbar-highlight nil
-   :background "white"
-   :foreground "black"
-   :underline nil
-   :box '(:line-width 5 :color "white" :style nil))
-  (set-face-attribute
-   'tabbar-button nil
-   :box '(:line-width 1 :color "gray20" :style nil))
-  (set-face-attribute
-   'tabbar-separator nil
-   :background "gray20"
-   :height 0.6)
-
-  ;; Change padding of the tabs
-  ;; we also need to set separator to avoid overlapping tabs by highlighted tabs
-  (custom-set-variables
-   '(tabbar-separator (quote (0.5))))
-  ;; adding spaces
-  (defun tabbar-buffer-tab-label (tab)
-    "Return a label for TAB.
-That is, a string used to represent it on the tab bar."
-    (let ((label  (if tabbar--buffer-show-groups
-          (format "[%s]  " (tabbar-tab-tabset tab))
-        (format "%s  " (tabbar-tab-value tab)))))
-      ;; Unless the tab bar auto scrolls to keep the selected tab
-      ;; visible, shorten the tab label to keep as many tabs as possible
-      ;; in the visible area of the tab bar.
-      (if tabbar-auto-scroll-flag
-    label
-  (tabbar-shorten
-   label (max 1 (/ (window-width)
-       (length (tabbar-view
-          (tabbar-current-tabset)))))))))
-  (global-set-key [M-left] 'tabbar-backward-tab)
-  (global-set-key [M-right] 'tabbar-forward-tab))
-
-(tabbar-mode 1)
-  
 ;; Highlight
 
 (if (package-installed-p 'indent-guide)
@@ -212,9 +166,28 @@ That is, a string used to represent it on the tab bar."
 ;; Custom Emacs
  
 (add-hook 'focus-out-hook
-    (lambda ()
-      (save-some-buffers t)))
+	  (lambda ()
+	    (save-some-buffers t)))
 
 ;; Select All
 
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
+
+;; Tabber - inspired by Amit Patel screenshot http://www.emacswiki.org/pics/static/NyanModeWithCustomBackground.png
+
+(global-set-key [M-left] 'tabbar-backward)
+(global-set-key [M-right] 'tabbar-forward)
+
+(require 'tabbar-ruler)
+
+(setq tabbar-ruler-global-tabbar t)
+(setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+
+(global-set-key (kbd "C-c t") 'tabbar-ruler-move)
+
+(custom-set-faces
+ '(tabbar-default ((t (:height 0.85))))
+ '(tabbar-unselected ((t (:height 0.85 :foreground "DarkGray" :background "#1f4f4f" :bold t))))
+ '(tabbar-button ((t (:height 0.85 :foreground "WhiteSmoke" :background "#1f4f4f"))))
+ '(tabbar-separator ((t (:background "gray50"))))
+ '(tabbar-selected ((t (:height 0.85 :foreground "WhiteSmoke" :background "#1f4f4f" :bold t)))))
