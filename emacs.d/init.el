@@ -97,6 +97,10 @@
   (package-refresh-contents)
   (package-install 'mode-icons))
 
+(unless (package-installed-p 'paredit)
+  (package-refresh-contents)
+  (package-install 'paredit))
+
 ;; Move Lines
 
 (require 'move-lines)
@@ -116,11 +120,11 @@
 
 ;; Rainbow & Clojure Hook
 
-(if (package-installed-p 'rainbow-delimiters)
-    (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'python-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'php-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+;; (if (package-installed-p 'rainbow-delimiters)
+(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'python-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'php-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
 
 ;; Tabs & Python Hook
 
@@ -162,6 +166,13 @@
 (if (package-installed-p 'undo-tree)
   (global-undo-tree-mode 1)
   (global-set-key (kbd "M-_") 'undo-tree-redo))
+
+;; Paredit
+
+(add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'python-mode-hook 'paredit-mode)
+(add-hook 'php-mode-hook 'paredit-mode)
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
 ;; Custom Emacs
  
