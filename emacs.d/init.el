@@ -202,3 +202,9 @@
  '(tabbar-button ((t (:height 0.85 :foreground "WhiteSmoke" :background "#1f4f4f"))))
  '(tabbar-separator ((t (:background "gray50"))))
  '(tabbar-selected ((t (:height 0.85 :foreground "WhiteSmoke" :background "#1f4f4f" :bold t)))))
+
+(defun browse-url-firefox-search (url)
+  ;; http://ergoemacs.org/emacs/elisp_idioms_prompting_input.html
+  (interactive "sDuck Search (GO): ")
+  (browse-url (browse-url-encode-url
+	       (concat "https://duckduckgo.com/?q=" url "&ia=web"))))
