@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 1, 2016 8:30:23 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.renanpalmeira.hibernate.Member" table="member" catalog="tecfalcon" optimistic-lock="version">
+        <id name="idMember" type="java.lang.Integer">
+            <column name="id_member" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" not-null="true" />
+        </property>
+        <property name="avatar" type="string">
+            <column name="avatar" />
+        </property>
+        <property name="idMemberPhone" type="int">
+            <column name="id_member_phone" not-null="true" />
+        </property>
+        <property name="createDate" type="timestamp">
+            <column name="create_date" length="19" not-null="true" />
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column name="update_date" length="19" not-null="true" />
+        </property>
+        <property name="status" type="int">
+            <column name="status" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
