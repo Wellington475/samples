@@ -3,9 +3,6 @@ package com.renanpalmeira.hibernate;
 import java.util.List;
 import org.hibernate.Session;
 
-import com.renanpalmeira.hibernate.Member;
-import com.renanpalmeira.hibernate.util.HibernateUtil;
-
 public class App {
     public static void main(String args[]) {
 

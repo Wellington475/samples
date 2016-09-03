@@ -1,6 +1,5 @@
 package com.renanpalmeira.hibernate;
 
-
 import java.util.Date;
 
 /**
