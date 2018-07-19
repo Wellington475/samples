@@ -5,28 +5,42 @@
 	if(is_array($_POST)) {
 		$content = '';
 		$fields = array('name', 'surname', 'email', 'password', 're-password');
+
 		foreach ($_POST as $key => $value) {
+
 			if(strlen($value)<3) {
-				echo $key.' precisa ter mais que 3 caracteres.';
+				$alert = '<div class="alert alert-danger" role="alert">
+                         '.$key.' precisa ter mais que 3 caracteres.
+                         </div>'; 
 				die();
 			}
+
 			if(empty($value)) {
-				echo $value.' está inválido.';
+				$alert = '<div class="alert alert-danger" role="alert">
+                         '.$value.' Estar invalido.
+                         </div>';
 				die();
 			}
+
 			if(!in_array($key, $fields)) {
-				echo $key.' não existe.';
+				$alert = '<div class="alert alert-danger" role="alert">
+                         '.$key.' não existe.
+                         </div>';
 				die();
 			}
+
 			$content .= (strtoupper($key).': '.$value);
 			$content .= "\n";
+
+
 		}
+
+		
 		if($_POST['password']==$_POST['re-password'] && (bool)preg_match($pattern, $_POST['email'])) {
 
-			$email = htmlspecialchars($_POST['email']);
-			$name = htmlspecialchars($_POST['name']);
-			$surname = htmlspecialchars($_POST['surname']);
-			$password = htmlspecialchars($_POST['password']);
+			
+
+           
 
 			$filename = $media.uniqid();
 			$filename .= '.txt';
@@ -36,11 +50,15 @@
 			fclose($file_user);
 
 
-			echo "Cadastrou :D";
+			$alert = '<div class="alert alert-success" role="alert">
+                          Cadastrado com Sucesso.
+                         </div>';
 		}
 	}
 	else
-		echo 'Campos em branco';
+		$alert = '<div class="alert alert-danger" role="alert">
+                 Campos em brancos.
+                   </div>';;
 ?>
 <script type="text/javascript">
 	window.parent.document.formulario.reset();
