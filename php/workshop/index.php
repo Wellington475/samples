@@ -1,64 +1,59 @@
+<?php 
+require_once("Cad.class.php");
+
+$botao = strip_tags(filter_input(INPUT_POST, 'submit',FILTER_SANITIZE_STRING));
+
+if($botao): 
+$cadastro = new Cad();
+$recebe = $cadastro->_cadastrar_user($botao);
+$erro=$cadastro->_set_erro();
+
+endif;
+
+?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Formulário :)</title>
+		<title>Formulário Cadastro de Usuario</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="static/css/normalize.css">
-		<link rel="stylesheet" href="static/css/skeleton.css">
-		<style type="text/css">
-			label span {
-				color: silver;
-				font-size: 12px;
-				padding-left: 5px;
-			}
-		</style>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<div class="container">
-			<div class="eleven">
-				<div class="row">
-					<h2>Formul&aacute;rio</h2>
-				</div>
+
+		
+			<div class="card-header">
+				<h2 class="">Cadastro de usuario</h2>
 			</div>
-			<div class="eleven">
-				<form name="formulario" method="post" action="save.php" target="loaderframe">
-					<div class="row">
-						<div class="eleven">
-							<label for="email">E-Mail</label>
-							<input name="email" class="u-full-width" placeholder="test@email.com" id="email" type="email">
-						</div>
-					</div>
-					<div class="row">
-						<div class="six columns">
-							<label for="name">Nome</label>
-							<input name="name" class="u-full-width" id="name" type="text">
-						</div>
-						<div class="six columns">
-							<label for="surname">Sobrenome</label>
-							<input name="surname" class="u-full-width" id="surname" type="text">
-						</div>
-					</div>
-					<div class="row">
-						<div class="six columns">
-							<label for="senha">Senha<span>* Mais de 4 caracteres</span></label>
-							<input name="password" class="u-full-width" placeholder="Senha" id="senha" type="password">
-						</div>
-						<div class="six columns">
-							<label for="re-senha">Repita a senha</label>
-							<input name="re-password" class="u-full-width" placeholder="Senha" id="re-senha" type="password">
-						</div>
-					</div>
-					<input class="button-primary" value="Salvar" type="submit">
-					<input class="button" value="Cancelar" type="reset">
-				</form>
+			<div class="contener-form">
+				<?php 
+				    
+                   if(isset($erro)): 
+
+                   	echo $erro; 
+
+                   endif;
+				?>
+				<form name="formulario" method="post" action="" target="loaderframe" id="formulario">
+					<label for="email" class="label">Email</label>
+					<input type="email" name="email" class="form-control" placeholder="Enter email" id="email" required>
+					<label for="nome" class="label">Nome</label>
+					<input type="name" name="name" class="form-control" placeholder="Digte seu Nome" id="name"required=>
+					<label for="sobrenome" class="label">Sobrenome</label>
+					<input type="surname" name="surname" class="form-control" placeholder="Digte o Sobrenome" id="surname" required>
+					<label for="senha" class="label">Senha</label>
+					<input type="password" name="password" class="form-control" placeholder="Digte a Senha" id="password" required>
+					<label for="re-senha" class="label">Repita a Senha</label>
+					<input type="password" name="re-password" class="form-control" placeholder="Digte a senha novamente" id="re-password" required>
+					<button class="btn btn-info" type="submit" name="submit" value="cadastrar">Salvar</button>
+					<button class="btn btn-info" type="reset" name="submit" value="cancelar">Cancelar</button>
+				</form>	
+				
 			</div>
-			<div class="eleven">
-				<div class="row">
-					<iframe src="" name="loaderframe" frameborder="0" width="100%" height="200px"></iframe>
-				</div>
-			</div>
-		</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script type="text/javascript" src="script.js"></script>
+					
 	</body>
 </html>
